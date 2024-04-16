@@ -3,13 +3,17 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { SignUpPage } from './pages'
+import { AuthProvider } from './contexts/AuthContext'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <SignUpPage />
+    <AuthProvider>
+    <SignUpPage />
+    </AuthProvider>
+
+
     </>
   )
 }

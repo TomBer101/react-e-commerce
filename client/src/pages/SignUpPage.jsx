@@ -8,22 +8,27 @@ import  Checkbox  from '@mui/material/Checkbox';
 import  FormControlLabel  from '@mui/material/FormControlLabel';
 import  Button  from '@mui/material/Button';
 
-const SignUpPage = () => {
+import { useAuth } from '../contexts/AuthContext';
 
-    const handleSubmit = (event) => {
+const SignUpPage = () => {
+    const {error, loading, signup } = useAuth()
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
         const data = new FormData(event.currentTarget);
-        console.log({
+        const userData = {
             firstName: data.get('fname'),
             lastName: data.get('lname'),
             userName: data.get('userName'),
             password: data.get('password'),
-            approved : data.get('approve'),
-        });
+            shareData : data.get('shareData'),
+        }
+        console.log(userData);
+        await signup(userData);
 
 
     };
-
     return (
         <Container sx={{backgroundColor : '#e0e0e0', margin : '0', width : '33%', padding : '2%', minWidth : '190px'}}>
             <Box sx={{backgroundColor : 'white', padding : '8%'}}>
@@ -66,7 +71,7 @@ const SignUpPage = () => {
                         variant='outlined'
                         type='password'
                     />
-                    <FormControlLabel control={<Checkbox name='approve' />} label='Allow others to see my orders' />
+                    <FormControlLabel control={<Checkbox name='shareData' />} label='Allow others to see my orders' />
                     <Button variant='contained' type='submit'>Create</Button>
                 </Box>
             </Box>
