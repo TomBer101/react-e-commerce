@@ -1,17 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {Routes, Route} from 'react-router-dom';
+
 import './App.css'
-import { SignUpPage } from './pages'
-import { AuthProvider } from './contexts/AuthContext'
+import { SignUpPage, AdminLaout, LoginPage, UserLaout } from './pages'
+//import { AuthProvider } from './contexts/AuthContext'
 
 function App() {
 
   return (
     <>
-    <AuthProvider>
-    <SignUpPage />
-    </AuthProvider>
+    <Routes>
+      <Route index  path='/login' element={<LoginPage />} />
+      <Route path='/register' element={<SignUpPage />} />
+      <Route path='/admin' element={<AdminLaout />} />
+      <Route path='/user' element={<UserLaout />} />
+    </Routes>
 
 
     </>
