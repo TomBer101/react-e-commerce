@@ -8,10 +8,10 @@ import  Checkbox  from '@mui/material/Checkbox';
 import  FormControlLabel  from '@mui/material/FormControlLabel';
 import  Button  from '@mui/material/Button';
 
-//import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const SignUpPage = () => {
-    //const {error, loading, signup } = useAuth()
+    const {error, loading, onSignup } = useAuth()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,10 +25,9 @@ const SignUpPage = () => {
             shareData : data.get('shareData'),
         }
         console.log(userData);
-        await signup(userData);
-
-
+        onSignup(userData);
     };
+    
     return (
         <Container sx={{backgroundColor : '#e0e0e0', margin : '0', width : '33%', padding : '2%', minWidth : '190px'}}>
             <Box sx={{backgroundColor : 'white', padding : '8%'}}>

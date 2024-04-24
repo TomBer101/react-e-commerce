@@ -4,37 +4,36 @@ import {doc, query, collection, onSnapshot, getDoc, setDoc} from 'firebase/fires
 
 export const registerUser = async (userInfo) => {
     console.log('in register');
-    const {fname, lname, userName, password, shareData} = userInfo;
+    const {firstName, lastName, userName, password, shareData} = userInfo;
     const registerDate = new Date().toLocaleDateString();
 
     try {
         console.log('user name: ', userName);
         const docRef = doc(db, 'users', userName);
         const docSnap = await getDoc(docRef);
-console.log('in else');
 
         if (docSnap.exists()) {
             console.log(`User ${userName} already exists`);
+            return {success : false, error: `User ${userName} already exists`}
         } else {
             const generalInfo = {
-                name : `${fname} ${lname}`,
+                name : `${firstName} ${lastName}`,
                 role : 'user',
                 userName,
+                shareData,
+                registerDate,
             }
 
             const privateInfo = {
                 userName,
                 password,
-                shareData,
-                registerDate,
-                
             }
 
             const generalPromise = setDoc(doc(db, 'users', userName), generalInfo);
             const privatePromise = setDoc(doc(db, 'users-credentials', userName), privateInfo);
 
             await Promise.all([generalPromise, privatePromise]);
-            return { success: true };
+            return { success: true, role : 'user'};
         } 
 
         } catch (err) {
@@ -53,7 +52,7 @@ export const loginUser = async (userName, password) => {
             return { success: false, error: `User with the name ${userName} does not exist! Plaese register first.` }; 
         } else if (password === docSnap.data().password) {
             
-            
+                console.log(docSnap.data());
                 console.log('User confirmd - can redirect to user page')
                 return({success : true});
             

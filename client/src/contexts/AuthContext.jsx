@@ -1,5 +1,8 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { loginUser, registerUser } from '../services/authService';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const AuthContext = createContext();
 
@@ -10,31 +13,29 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
 
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useLocalStorage('ecommerce-user', null);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
 
-    const signup = async ({fname, lname, userName, password, shareData}) => {
+    const signup = async ({firstName, lastName, userName, password, shareData}) => {
 
         try {
         console.log('signing up?');
 
             setLoading(true);
-            console.log('user name....: ', userName);
-            const res = await registerUser({ fname, lname, userName, password, shareData });
+            console.log('user name: ', userName, 'flname: ', firstName, lastName);
+            const res = await registerUser({ firstName, lastName, userName, password, shareData });
             console.log('res: ', res);
             if (res.success) {
-                setCurrentUser({ userName });
-                alert('sucess')
+                setCurrentUser({ userName, role : res.role });
             } else {
-                setError('Registration failed');
-                alert('fail')
-
+                setError('User name is taken.');
             }
         } catch (err) {
             console.log(err);
-            setError('Registration failed');
+            setError('Registration failed - Internal Error');
         } finally {
             setLoading(false);
         }
@@ -45,11 +46,9 @@ export function AuthProvider({ children }) {
             setLoading(true);
             const res = await loginUser(userName, password);
             if (res.success) {
-                alert('sucess')
                 setCurrentUser({ userName });
             } else {
-                alert('fail')
-                setError('Registration failed');
+                setError('Login failed');
             }
         } catch (err) {
             setError('Login failed');
@@ -60,11 +59,17 @@ export function AuthProvider({ children }) {
 
     function logout() {
         setCurrentUser(null);
+        navigate('/login');
     }
 
-    const value = {
-        currentUser, signup, login, logout, error, loading
-    }
+    const value = useMemo( () => ({
+        currentUser, 
+        error, 
+        loading, 
+        onSignup : signup, 
+        onLogin : login, 
+        onLogOut : logout
+    }), [currentUser]);
 
     return (
         <AuthContext.Provider value={value}>
