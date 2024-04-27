@@ -30,6 +30,7 @@ export function AuthProvider({ children }) {
             console.log('res: ', res);
             if (res.success) {
                 setCurrentUser({ userName, role : res.role });
+                navigate('/user');
             } else {
                 setError('User name is taken.');
             }
@@ -41,12 +42,13 @@ export function AuthProvider({ children }) {
         }
     }
 
-       const login = async(userName, password) => {
+    const login = async({userName, password}) => {
         try {
             setLoading(true);
             const res = await loginUser(userName, password);
             if (res.success) {
-                setCurrentUser({ userName });
+                setCurrentUser({ userName, role : res.role });
+                navigate(`/${res.role}`);
             } else {
                 setError('Login failed');
             }

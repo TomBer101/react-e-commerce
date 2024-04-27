@@ -1,16 +1,18 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Route } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/AuthContext';
 
-function ProtectedRoute({ innerChildren, roleAccess }) {
+function ProtectedRoute({ component : Component, allowedRole, ...rest }) {
     const {currentUser} = useAuth();
 
-    if (!currentUser || (roleAccess && roleAccess !== currentUser.role)) {
-        return <Navigate to='/login' />
+    if (!currentUser || ( allowedRole !== currentUser.role)) {
+        return <Navigate to='/' />
     }  
 
-    return innerChildren;
+    return (
+        <Component />
+    )
 }
 
 export default ProtectedRoute;

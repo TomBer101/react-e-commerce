@@ -9,27 +9,24 @@ import  FormControlLabel  from '@mui/material/FormControlLabel';
 import  Button  from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-//import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const SignUpPage = () => {
-    //const {error, loading, signup } = useAuth()
+    const {error, loading, onLogin } = useAuth()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const data = new FormData(event.currentTarget);
         const userData = {
-            firstName: data.get('fname'),
-            lastName: data.get('lname'),
             userName: data.get('userName'),
             password: data.get('password'),
-            shareData : data.get('shareData'),
         }
         console.log(userData);
-        await signup(userData);
-
+        await onLogin(userData);
 
     };
+
     return (
         <Container sx={{backgroundColor : '#e0e0e0', margin : '0', padding : '2%', minWidth : '190px'}}>
             <Box sx={{backgroundColor : 'white', padding : '8%'}}>
@@ -56,9 +53,9 @@ const SignUpPage = () => {
                         type='password'
                         size='small'
                     />
-                    <Button variant='contained' type='submit' sx={{width : '100%', margin : '10px 0'}}>Create</Button>
+                    <Button variant='contained' type='submit' sx={{width : '100%', margin : '10px 0'}}>Login</Button>
                     <div>
-                        New user? <Link>Register</Link>
+                        New user? <Link to='register'>Register</Link>
                     </div>
                 </Box>
             </Box>

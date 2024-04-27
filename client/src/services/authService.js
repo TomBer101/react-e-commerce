@@ -18,7 +18,6 @@ export const registerUser = async (userInfo) => {
         } else {
             const generalInfo = {
                 name : `${firstName} ${lastName}`,
-                role : 'user',
                 userName,
                 shareData,
                 registerDate,
@@ -27,6 +26,7 @@ export const registerUser = async (userInfo) => {
             const privateInfo = {
                 userName,
                 password,
+                role : 'user'
             }
 
             const generalPromise = setDoc(doc(db, 'users', userName), generalInfo);
@@ -45,7 +45,7 @@ export const registerUser = async (userInfo) => {
 
 export const loginUser = async (userName, password) => {
     try {
-        const docRef = doc(db, 'users', userName);
+        const docRef = doc(db, 'users-credentials', userName);
         const docSnap = await getDoc(docRef);
         
         if (!docSnap.exists()) {
@@ -54,7 +54,7 @@ export const loginUser = async (userName, password) => {
             
                 console.log(docSnap.data());
                 console.log('User confirmd - can redirect to user page')
-                return({success : true});
+                return({success : true, role : docSnap.data().role});
             
         } else {
             return {success : false, error : 'Wrong Password'}
