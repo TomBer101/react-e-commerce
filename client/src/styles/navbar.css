@@ -1,0 +1,20 @@
+.nav-menue {
+    display: flex;
+    justify-content: space-around;
+    color: black;
+}
+
+.nav-menue li {
+    color : black
+}
+
+nav {
+    width : 100%;
+    top : 0;
+    position: fixed;
+    z-index: 1000;
+
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
+}
