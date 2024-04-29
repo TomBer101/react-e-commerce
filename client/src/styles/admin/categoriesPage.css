@@ -1,0 +1,4 @@
+.categories-list {
+    max-height: 55vh;
+    overflow-y: auto;
+}

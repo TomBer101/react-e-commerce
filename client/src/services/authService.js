@@ -1,5 +1,5 @@
 import db from '../utils/firebase';
-import {doc, query, collection, onSnapshot, getDoc, setDoc} from 'firebase/firestore'
+import {doc, query, collection, getDoc, setDoc} from 'firebase/firestore'
 
 
 export const registerUser = async (userInfo) => {

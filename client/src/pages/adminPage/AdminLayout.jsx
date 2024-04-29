@@ -9,7 +9,7 @@ const AdminLayout = () => {
     return (
         <div>
             <NavBar />
-            <Container sx={{marginTop : '7rem', padding : '5rem', backgroundColor : '#d5d5d5'}}>
+            <Container maxWidth={false} sx={{marginTop : '7rem', padding : '1rem', backgroundColor : '#e3e3e3', height : '83vh'}}>
             <Outlet />
 
             </Container>
