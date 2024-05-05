@@ -1,4 +1,7 @@
 import {Routes, Route} from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import store from './redux/store';
 
 import './App.css'
 import { SignUpPage, AdminLaout, LoginPage, UserLaout } from './pages'
@@ -12,6 +15,8 @@ function App() {
 
   return (
     <>
+    <Provider store={store}>
+
     <Routes>
       <Route index  path='/' element={<LoginPage />} />
       <Route path='/register' element={<SignUpPage />} />
@@ -24,6 +29,7 @@ function App() {
       <Route path='/user' element={<ProtectedRoute allowedRole='user' component={UserLaout} />} />
       <Route path='*' element={<h1>Does Not Exists</h1>} />
     </Routes>
+    </Provider>
 
 
     </>

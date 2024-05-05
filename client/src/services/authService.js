@@ -21,6 +21,7 @@ export const registerUser = async (userInfo) => {
                 userName,
                 shareData,
                 registerDate,
+                role : 'user'
             }
 
             const privateInfo = {
