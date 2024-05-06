@@ -8,6 +8,7 @@ import { getAllCustomers } from '../../services/usersService';
 import { fetchUsersData, fetchUsersSuccess } from '../../redux/actions/admin/userAction';
 import { getAllPurchases } from '../../services/purchasesService';
 import { getAllProducts } from '../../services/productsService';
+import { getAllCategories } from '../../services/categoriesService';
 
 // TODO : import navbar content here and pas it as props ? => re render each time layout re renders (?)
 
@@ -21,9 +22,9 @@ const AdminLayout = () => {
         const usersUnsubscribe  = getAllCustomers(dispatch);
         const productsUnsubscribe  = getAllProducts(dispatch);
         const purchasesUnsubscribe  = getAllPurchases(dispatch);
+        const categoriesUnsubscribe = getAllCategories(dispatch);
 
         // const unsubscribe = dispatch(fetchUsersData());
-
     }, [])
 
     // useEffect(() =>{

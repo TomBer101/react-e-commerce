@@ -4,14 +4,16 @@ import { Box, Typography, Paper, OutlinedInput, Button } from '@mui/material';
 
 import Category from '../../components/admin/Category';
 import '../../styles/admin/categoriesPage.css'
+import { useSelector } from 'react-redux';
 
 function Categories() {
-    const [categories, setCategories] = useState([]);
+    //const [categories, setCategories] = useState([]);
+    const categories = useSelector(state => state.categories.categories)
     const formRef = useRef(null);
 
-    useEffect(() => {
-        getAllCategories(setCategories);
-    }, [])
+    // useEffect(() => {
+    //     getAllCategories(setCategories);
+    // }, [])
 
     const handleSubmit = (event) => {
         event.preventDefault();

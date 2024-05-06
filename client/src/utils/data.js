@@ -31,6 +31,16 @@ export const getAll =  (collectionName, callback) => {
   })
 }
 
+// export const getAll = async (collectionName) => {
+//   const q = query(collection(db, collectionName));
+//   const querySnapshot = await getDocs(q);
+  
+//   return querySnapshot.docs.map(doc => ({
+//     id: doc.id,
+//     ...doc.data()
+//   }));
+// };
+
 export const addDocument = async (collectionName,data, callback) => {
   const docRef = doc(db, collectionName, data.id);
   const docSnap = await getDoc(docRef);
