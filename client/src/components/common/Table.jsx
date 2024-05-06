@@ -1,41 +1,49 @@
 import React from 'react';
-
-import Paper  from '@mui/material/Paper';
-import  TableContainer from '@mui/material/TableContainer';
+import Paper from '@mui/material/Paper';
+import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { TableBody, TableCell } from '@mui/material';
 
-const Table = ({data}) => {
+const Table = ({ data }) => {
 
-    const objectKeys = Object.keys(data[0]); // TODO : Error handling....
-    
+    console.log(data);
+
+    if (!data || data.length === 0 || data === undefined) {
+        return null; // Return early if data is null or empty
+    }
+
+    const objectKeys = Object.keys(data[0]);
+    console.log('object keys: ', objectKeys);
+
     return (
         <TableContainer component={Paper}>
             <Table>
                 <TableHead>
                     <TableRow>
-                    {
-                        objectKeys.map(objectKey => {
-                            return <TableCell align='center' key={objectKey}>{objectKey}</TableCell>
-                        })
-                    }
+                        {objectKeys.map(objectKey => (
+                            <TableCell align='center' key={objectKey}>
+                                {objectKey}
+                            </TableCell>
+                        ))}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {
-                        data.map(entity => {
-                            return <TableRow key={entity.id}>
-                                {
-                                    objectKeys.forEach(objectKey => {
-                                        return (
-                                            <TableCell key={entity.id + objectKey}>{entity[objectKey]}</TableCell>
-                                        )
-                                    })
-                                }
-                            </TableRow>
-                        })
-                    }
+                    {data && data.map(entity => (
+                        <TableRow key={entity.id}>
+                            {objectKeys.map(objectKey => (
+                                <TableCell key={entity.id + objectKey}>
+                                    {
+                                    Array.isArray(entity[objectKey]) ? (
+                                        <Table data={entity[objectKey]} />
+                                    ) : (
+                                        entity[objectKey]
+                                    )
+                                    }
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         </TableContainer>

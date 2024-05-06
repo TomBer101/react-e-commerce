@@ -14,27 +14,24 @@ import { getAllProducts } from '../../services/productsService';
 const AdminLayout = () => {
 
     const dispatch = useDispatch()
-    const users = useSelector(state => state.users.users)
-    const purchases = useSelector(state => state.purchases.purchases);
-    const products = useSelector(state => state.products.products)
+
 
 
     useEffect(() => {
         const usersUnsubscribe  = getAllCustomers(dispatch);
+        const productsUnsubscribe  = getAllProducts(dispatch);
+        const purchasesUnsubscribe  = getAllPurchases(dispatch);
 
         // const unsubscribe = dispatch(fetchUsersData());
 
     }, [])
 
-    useEffect(() =>{
-        const purchasesUnsubscribe  = getAllPurchases(dispatch);
-    }, [])
+    // useEffect(() =>{
+    // }, [])
 
-    useEffect(() =>{
-        const productsUnsubscribe  = getAllProducts(dispatch);
-    }, [])
+    // useEffect(() =>{
+    // }, [])
 
-    console.log('users: ', users, 'purchases: ', purchases, 'products: ', products);
 
 
     return (

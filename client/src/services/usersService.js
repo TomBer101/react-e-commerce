@@ -18,5 +18,19 @@ export const getAllCustomers = (dispatch) => {
         dispatch(fetchUsersSuccess(data));
     });
 
-    return unsubscribe;
+    
 }
+
+export const combineUserData = (users, purchases, products) => {
+    // Combine user data with their purchases
+    const combinedData = users.map(user => {
+        const userPurchases = purchases.filter(purchase => purchase.userId === user.id);
+        const userProducts = userPurchases.map(purchase => {
+            const product = products.find(product => product.id === purchase.productId);
+            return { ...purchase, productName: product ? product.title : 'Unknown' };
+        });
+        return { ...user, purchases: userProducts };
+    });
+    console.log(combinedData);
+    return combinedData;
+};
