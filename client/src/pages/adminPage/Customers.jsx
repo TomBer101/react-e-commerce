@@ -19,7 +19,7 @@ function Customers() {
 
     useEffect(() => {
         console.log(' ************ states within useeffect: ********');
-   console.log('users: ', users, 'purchases: ', purchases, 'products: ', products);
+        console.log('users: ', users, 'purchases: ', purchases, 'products: ', products);
 
         if (users.length > 0 && purchases.length > 0 && products.length > 0) {
             console.log('HERE');
