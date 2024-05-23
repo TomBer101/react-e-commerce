@@ -1,4 +1,4 @@
-import {query, onSnapshot, collection} from 'firebase/firestore'
+import {query, onSnapshot, collection, updateDoc, doc} from 'firebase/firestore'
 
 import db from "../utils/firebase"
 import {  FETCH_PRODUCTS_SUCCESS, fetchProductsSuccess } from "../redux/actions/productsAction";
@@ -21,4 +21,10 @@ export const getAllProducts = (dispatch) => {
         })
         dispatch(fetchProductsSuccess(products))
     })
+}
+
+export const updateProduct = async (productId, modifiedProduct) => {
+    const updatedProductRef = doc(db, 'products', productId);
+
+    await updateDoc(updatedProductRef, modifiedProduct)
 }

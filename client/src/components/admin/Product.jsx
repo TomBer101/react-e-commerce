@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { Button, FormControl, Grid, InputBase, InputLabel, Select, TextareaAutosize, Typography } from '@mui/material';
+import { Button, FormControl, Grid, InputBase, InputLabel, MenuItem, Select, TextareaAutosize, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField'
 
 import Table from '../common/Table';
+import { getCategoryDoc } from '../../services/categoriesService';
+import { updateProduct } from '../../services/productsService';
+
 
 const Product = ({ title, description, price, category, imgLink, id }) => {
 
@@ -19,9 +22,22 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
         title: title,
         description: description,
         price: price,
-        category: category,
+        category: '',
         imgLink: imgLink
     });
+
+
+    useEffect(() => {
+        const getCategoryName = async () => {
+            const categoryName = await getCategoryDoc(category)
+            setProductInput({
+                ...productInput,
+                category : categoryName
+            })
+        }
+
+        getCategoryName();
+    }, [category])
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -31,13 +47,10 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
         })
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
-        if (event.target.checkValidity()) {
-          alert("Form is valid! Submitting the form...");
-        } else {
-          alert("Form is invalid! Please check the fields...");
-        }
+
+        await updateProduct(id, productInput);
     };
 
     // data manipulation => combine each product with purchases
@@ -64,9 +77,16 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
                                 id={`${id}-category`}
                                 value={productInput.category}
                                 onChange={handleInputChange}
+                                name='category'
                                 size='small'
                                 sx={{mb : '5%', flex : '1'}}
-                            />
+                            >
+                                {
+                                    categories.map(category => (
+                                         <MenuItem value={category.id}>{category.name}</MenuItem>
+                                    ))
+                                }
+                            </Select>
                         </FormControl>
                         <TextField 
                             multiline  

@@ -1,5 +1,5 @@
 import db from '../utils/firebase';
- import {doc, query, onSnapshot, collection} from 'firebase/firestore';
+ import {doc, query, onSnapshot, collection, getDoc} from 'firebase/firestore';
 
 import { fetchCategoriesSuccess } from "../redux/actions/admin/categoriesAction";
 import { addDocument, getAll } from "../utils/data"
@@ -35,3 +35,14 @@ export const getAllCategories = (dispatch) => {
 export const addCategory = async (callback, data) => {
     await addDocument('categories', data, callback);
 } 
+
+export const getCategoryDoc = async (categoryRef) => {
+    const categoryDocSnap = await getDoc(categoryRef);
+    if (categoryDocSnap.exists) {
+      const categoryData = categoryDocSnap.data();
+      return categoryData.name; // Assuming the category document has a "name" field
+    } else {
+      console.error("Category document not found");
+      return null;
+    }
+  };
