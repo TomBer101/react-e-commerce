@@ -25,6 +25,10 @@ export const getAllProducts = (dispatch) => {
 
 export const updateProduct = async (productId, modifiedProduct) => {
     const updatedProductRef = doc(db, 'products', productId);
+    const categoryRef = doc(db, 'categories', modifiedProduct.category);
 
-    await updateDoc(updatedProductRef, modifiedProduct)
+    await updateDoc(updatedProductRef, {
+        ...modifiedProduct,
+        category : categoryRef
+    })
 }

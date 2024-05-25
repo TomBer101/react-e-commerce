@@ -5,6 +5,8 @@ import { Box, Typography, Paper, OutlinedInput, Button } from '@mui/material';
 import Category from '../../components/admin/Category';
 import '../../styles/admin/categoriesPage.css'
 import { useSelector } from 'react-redux';
+import   GenericTable from '../../components/common/Table';
+ '../../components/common/Table';
 
 function Categories() {
     //const [categories, setCategories] = useState([]);

@@ -40,7 +40,7 @@ export const getCategoryDoc = async (categoryRef) => {
     const categoryDocSnap = await getDoc(categoryRef);
     if (categoryDocSnap.exists) {
       const categoryData = categoryDocSnap.data();
-      return categoryData.name; // Assuming the category document has a "name" field
+      return {...categoryData, id : categoryDocSnap.id}; // Assuming the category document has a "name" field
     } else {
       console.error("Category document not found");
       return null;

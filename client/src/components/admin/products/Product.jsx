@@ -6,9 +6,9 @@ import Paper from '@mui/material/Paper';
 import { Button, FormControl, Grid, InputBase, InputLabel, MenuItem, Select, TextareaAutosize, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField'
 
-import Table from '../common/Table';
-import { getCategoryDoc } from '../../services/categoriesService';
-import { updateProduct } from '../../services/productsService';
+import Table from '../../common/Table';
+import { getCategoryDoc } from '../../../services/categoriesService';
+import { updateProduct } from '../../../services/productsService';
 
 
 const Product = ({ title, description, price, category, imgLink, id }) => {
@@ -29,14 +29,16 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
 
     useEffect(() => {
         const getCategoryName = async () => {
-            const categoryName = await getCategoryDoc(category)
+            const {name : categoryName, id : categoryId} = await getCategoryDoc(category)
             setProductInput({
                 ...productInput,
-                category : categoryName
+                category : categoryId
             })
         }
 
         getCategoryName();
+
+
     }, [category])
 
     const handleInputChange = event => {
@@ -83,7 +85,7 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
                             >
                                 {
                                     categories.map(category => (
-                                         <MenuItem value={category.id}>{category.name}</MenuItem>
+                                         <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
                                     ))
                                 }
                             </Select>
@@ -126,7 +128,7 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
                         />
                         <Box maxHeight={'23vh'} overflow={'hidden'}>
                             <Typography variant='h6' fontSize={'1rem'}>Bought by:</Typography>
-                            < Table  />
+                            
                         </Box>
                     </Grid>
                 </Grid>

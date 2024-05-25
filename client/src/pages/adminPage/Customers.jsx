@@ -4,7 +4,11 @@ import { useState, useEffect } from 'react';
 import  Typography  from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import { combineUserData } from '../../services/usersService';
-import Table from '../../components/common/Table';
+import   GenericTable from '../../components/common/Table';
+import UserTable from '../../components/admin/customers/CustomersTable';
+
+
+
 
 function Customers() {
 
@@ -15,7 +19,7 @@ function Customers() {
    console.log('users: ', users, 'purchases: ', purchases, 'products: ', products);
 
     
-    const [combinedUserData, setCombinedUserData] = useState(null);
+    const [combinedUserData, setCombinedUserData] = useState([]);
 
     useEffect(() => {
         console.log(' ************ states within useeffect: ********');
@@ -24,9 +28,12 @@ function Customers() {
         if (users.length > 0 && purchases.length > 0 && products.length > 0) {
             console.log('HERE');
             const usersData = combineUserData(users, purchases, products);
+
             setCombinedUserData(usersData);
         }
     }, [users, purchases, products]);
+
+    
 
     useEffect(() => {
         console.log('combined data changed: ',combinedUserData);
@@ -37,7 +44,7 @@ function Customers() {
     return (
         <div className='customers'>
             <Typography fontWeight='400' align='justify' variant='h2'>Customers</Typography>
-            {combinedUserData && <Table data={combinedUserData} />}
+            <UserTable users={combinedUserData} />
         </div>
     );
 }

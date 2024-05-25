@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 import {adminNavbar} from '../../utils/navbar';
@@ -9,6 +9,11 @@ import '../../styles/navbar.css'
 
 function NavBar() {
     const {currentUser} = useAuth();
+    const {pathname} = useLocation();
+    const currentPage = pathname.split('/')[2];
+    console.log(currentPage);
+
+    console.log(pathname);
 
     const content = currentUser && currentUser.role === 'admin' ? adminNavbar : null;
 
@@ -19,7 +24,8 @@ function NavBar() {
             <ul className="nav-menue">
                 {
                      content.map(item => {
-                        return <Link style={{color : 'black'}}  to={item.link} key={item.label}>{item.label}</Link>
+                        const isActive = currentPage === item.link
+                        return (<Link style={{color : isActive? 'blueviolet' : 'black'}}  to={item.link} key={item.label}>{item.label}</Link>)
                     })
                 }
             </ul>
