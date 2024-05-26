@@ -32,3 +32,18 @@ export const updateProduct = async (productId, modifiedProduct) => {
         category : categoryRef
     })
 }
+
+// export const combineProductData = (users, purchases, products) => {
+//     const combinedData = products.map(product => {
+//         const productPurchases = purchases.filter(purchase => purchase.productId === product.id);
+//         const producCustomers = productPurchases.map(purchase => {
+//             const customer = users.find(user => user.iserId === purchase.userId);
+//             return {
+//                 userName : customer.name,
+//                 quantity : purchase.quantity,
+//                 date : purchase.date
+//             }
+//         });
+//         return {}
+//     })
+// }

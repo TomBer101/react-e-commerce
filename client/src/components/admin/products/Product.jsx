@@ -9,15 +9,17 @@ import TextField from '@mui/material/TextField'
 import Table from '../../common/Table';
 import { getCategoryDoc } from '../../../services/categoriesService';
 import { updateProduct } from '../../../services/productsService';
+import PurchasesTable from '../customers/PurchasesTable';
 
 
-const Product = ({ title, description, price, category, imgLink, id }) => {
+const Product = ({ title, description, price, category, imgLink, id}) => {
 
     const categories = useSelector(state => state.categories.categories);
     const purchases = useSelector(state => state.purchases.purchases);
 
     console.log('categories: ', categories, 'purchases: ', purchases);
-
+    
+    const [productPurchases, setProductPurchases] = useState([]);
     const [productInput, setProductInput] = useState({
         title: title,
         description: description,
@@ -41,6 +43,11 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
 
     }, [category])
 
+    useEffect(() => {
+        const myPurchases = purchases.filter(purchase => purchase.productId === id);
+        setProductPurchases(myPurchases)
+    }, [purchases, id]);
+
     const handleInputChange = event => {
         const { name, value } = event.target;
         setProductInput({
@@ -58,7 +65,7 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
     // data manipulation => combine each product with purchases
 
     return (
-        <Box sx={{ width : '65%'}}>
+        <Box sx={{}}>
             <Paper component='form' elevation={5} sx={{p : '2%', borderRadius : '12px'}} onSubmit={handleSubmit} noValidate>
                 <Grid container spacing={2}>
                     <Grid item xs={6} >
@@ -128,7 +135,7 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
                         />
                         <Box maxHeight={'23vh'} overflow={'hidden'}>
                             <Typography variant='h6' fontSize={'1rem'}>Bought by:</Typography>
-                            
+                            <PurchasesTable purchases={productPurchases} />
                         </Box>
                     </Grid>
                 </Grid>

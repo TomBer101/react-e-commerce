@@ -4,12 +4,14 @@ import  Typography  from '@mui/material/Typography';
 import Product from '../../components/admin/products/Product';
 import { List, ListItem } from '@mui/material';
 import { getDoc } from 'firebase/firestore';
+// import { combineProductData } from '../../services/productsService';
 
 
 function Products() {
 
     const products = useSelector(state => state.products.products)
     console.log(products);
+
 
     // useEffect(() => {
     //     // Loop through products and fetch category data for each (assuming category IDs)
@@ -35,12 +37,13 @@ function Products() {
                     products.map(product => (
                         <ListItem key={product.id} sx={{}}>
                             <Product 
-                                category={product.category}
-                                description={product.description}
-                                id={product.id}
-                                imgLink={product.imgLink}
-                                price={product.price}
-                                title={product.title}
+                                // category={product.category}
+                                // description={product.description}
+                                // id={product.id}
+                                // imgLink={product.imgLink}
+                                // price={product.price}
+                                // title={product.title}
+                                {...product}
                             />
                         </ListItem>
                     ))

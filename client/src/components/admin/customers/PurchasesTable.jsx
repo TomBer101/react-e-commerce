@@ -3,7 +3,7 @@ import React from 'react'
 import GenericTable from '../../common/Table';
 
 const columns = [
-    { header: 'Product', accessor: 'productName' },
+    { header: 'Name', accessor: 'userId' },
     { header: 'Qty', accessor: 'quantity' },
     { header: 'Date', accessor: 'date', render: (timeStamp) => <span>{`${timeStamp.toDate().toLocaleDateString()}`}</span> },
   ];
