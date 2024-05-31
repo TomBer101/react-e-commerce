@@ -1,4 +1,4 @@
-import {query, onSnapshot, collection, updateDoc, doc} from 'firebase/firestore'
+import {query, onSnapshot, collection, updateDoc, doc, setDoc, addDoc} from 'firebase/firestore'
 
 import db from "../utils/firebase"
 import {  FETCH_PRODUCTS_SUCCESS, fetchProductsSuccess } from "../redux/actions/productsAction";
@@ -33,17 +33,13 @@ export const updateProduct = async (productId, modifiedProduct) => {
     })
 }
 
-// export const combineProductData = (users, purchases, products) => {
-//     const combinedData = products.map(product => {
-//         const productPurchases = purchases.filter(purchase => purchase.productId === product.id);
-//         const producCustomers = productPurchases.map(purchase => {
-//             const customer = users.find(user => user.iserId === purchase.userId);
-//             return {
-//                 userName : customer.name,
-//                 quantity : purchase.quantity,
-//                 date : purchase.date
-//             }
-//         });
-//         return {}
-//     })
-// }
+export const addProduct = async (productData) => {
+    const categoryRef = doc(db, 'categories', productData.category)
+
+    const productRef = await addDoc(collection(db, 'products'), {
+        ...productData,
+        category : categoryRef
+    });
+    console.log("Document written with ID: ", productRef.id);
+}
+
