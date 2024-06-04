@@ -24,15 +24,8 @@ const AdminLayout = () => {
         const purchasesUnsubscribe  = getAllPurchases(dispatch);
         const categoriesUnsubscribe = getAllCategories(dispatch);
 
-        // const unsubscribe = dispatch(fetchUsersData());
+        
     }, [])
-
-    // useEffect(() =>{
-    // }, [])
-
-    // useEffect(() =>{
-    // }, [])
-
 
 
     return (
