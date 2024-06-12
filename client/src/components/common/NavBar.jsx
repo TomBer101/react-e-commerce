@@ -33,7 +33,7 @@ function NavBar() {
                             )
                         } else {
                             return(
-                                <p onClick={() => onLogOut()}>{item.label}</p>
+                                <p key={item.label} onClick={() => onLogOut()}>{item.label}</p>
                             )
                         }
 
