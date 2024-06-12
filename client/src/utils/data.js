@@ -31,15 +31,6 @@ export const getAll =  (collectionName, callback) => {
   })
 }
 
-// export const getAll = async (collectionName) => {
-//   const q = query(collection(db, collectionName));
-//   const querySnapshot = await getDocs(q);
-  
-//   return querySnapshot.docs.map(doc => ({
-//     id: doc.id,
-//     ...doc.data()
-//   }));
-// };
 
 export const addDocument = async (collectionName,data, callback) => {
   const docRef = doc(db, collectionName, data.id);
@@ -54,7 +45,18 @@ export const addDocument = async (collectionName,data, callback) => {
   }
 }
 
-// Other API functions as needed
+export const getDocument = async (collectionName, docId) => {
+  const docRef = doc(db, collectionName, docId);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error( `${collectionName} collection does not containes the ID: ${docId}`);
+  }
+
+  return docSnap.data();
+}
+
+
 
 
 

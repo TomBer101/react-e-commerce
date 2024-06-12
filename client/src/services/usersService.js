@@ -1,6 +1,7 @@
 import { onSnapshot, collection, query, where } from "firebase/firestore"
 import db from "../utils/firebase"
 import { fetchUsersRequest, fetchUsersSuccess } from "../redux/actions/admin/userAction";
+import { getDocument } from "../utils/data";
 
 
 export const getAllCustomers = (dispatch) => {
@@ -34,3 +35,13 @@ export const combineUserData = (users, purchases, products) => {
     console.log(combinedData);
     return combinedData;
 };
+
+export const getUserData = async (userId) => {
+    try {
+        const user = await getDocument("users", userId);
+        return user;
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+}

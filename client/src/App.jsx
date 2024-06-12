@@ -10,6 +10,7 @@ import Customers from './pages/adminPage/Customers';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Products from './pages/adminPage/Products';
 import Statistics from './pages/adminPage/Statistics';
+import { AccountPage } from './pages/userPage';
 
 import ProductsPage from './pages/userPage/ProductsPage'
 
@@ -29,7 +30,7 @@ function App() {
             <Route path='statistics' element={<Statistics />} />
           </Route>
           <Route path='/user' element={<ProtectedRoute allowedRole='user' component={UserLaout} />} >
-            <Route path='products' element={<Categories />} />
+            <Route path='account' element={<AccountPage />} />
             <Route path='customers' element={<Customers />} />
             <Route path='products' element={<Products />} />
             <Route path='statistics' element={<Statistics />} />
