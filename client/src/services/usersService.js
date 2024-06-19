@@ -55,3 +55,4 @@ export const updateUser = async (updatedUser) => {
     }
 
 }
+

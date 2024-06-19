@@ -5,13 +5,14 @@ import { useAuth } from '../../contexts/AuthContext';
 import { getUserData, updateUser } from '../../services/usersService';
 import SignUpForm from '../../components/forms/SignUpForm';
 import { useSelector } from 'react-redux';
-import { changePurchasesVisibility } from '../../services/purchasesService';
+import { changePurchasesVisibility, getPurchasesByUser } from '../../services/purchasesService';
+
 
 const AccountPage = () => {
 
     const [userInfo, setUserInfo] = useState(null);
     const {currentUser} = useAuth();
-    const purchases = useSelector(this.state.purchases)
+    const usersPurchases = useSelector(state => getPurchasesByUser(state, currentUser.userName));
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -26,16 +27,12 @@ const AccountPage = () => {
 
     }, [currentUser])
 
-    // const myPurchases = React.useMemo(() => {
-    //     if (!user || !purchases) return []; // Handle potential undefined states
-    //     return purchases.filter((purchase) => purchase.userId === user.id);
-    //   }, [user.userName, purchases.length]);
 
     const saveUserUpdate = async (updatedUser) => {
         try {
             //update user purchases if needed
             if (updatedUser.shareData !== userInfo.shareData) {
-                await changePurchasesVisibility(currentUser.userName, updateUser.shareData, purchases)
+                await changePurchasesVisibility( updateUser.shareData, usersPurchases)
             }
             // update user info if needed -> travers the properties -> if there is at least one diffrence => update firestore
             await updateUser(updatedUser)

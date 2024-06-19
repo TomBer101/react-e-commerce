@@ -1,7 +1,9 @@
 import db from "../utils/firebase"
-import {  fetchPurchasesSuccess } from "../redux/actions/purchaseAction";
-import { getAll } from "../utils/data";
+import {createSelector} from 'reselect';
 import { collection, getDocs, onSnapshot, or, query, where, writeBatch } from "firebase/firestore";
+
+import { getAll } from "../utils/data";
+import {  fetchPurchasesSuccess } from "../redux/actions/purchaseAction";
 
 
 export const getAllPurchases = (dispatch, userId = undefined) => {
@@ -46,3 +48,12 @@ export const changePurchasesVisibility = async (userId, isVisible, purchases) =>
         throw new Error()
     }
 }
+
+const getAllPurchases = state => state.purchases;
+export const getPurchasesByUser = createSelector(
+    [getAllPurchases, (state, userId) => userId],
+    (allPurchases, userId) => {
+        if (!userId) return [];
+        return allPurchases.filter(purchase => purchase.userId === userId);
+    }
+)
