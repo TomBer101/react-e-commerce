@@ -1,4 +1,4 @@
-import { onSnapshot, collection, query, where } from "firebase/firestore"
+import { onSnapshot, collection, query, where, updateDoc } from "firebase/firestore"
 import db from "../utils/firebase"
 import { fetchUsersRequest, fetchUsersSuccess } from "../redux/actions/admin/userAction";
 import { getDocument } from "../utils/data";
@@ -44,4 +44,14 @@ export const getUserData = async (userId) => {
         console.log(err);
         return null;
     }
+}
+
+export const updateUser = async (updatedUser) => {
+    try {
+        const userRef = doc(db, 'users', updateUser.userName);
+        await updateDoc(userRef, updateUser);
+    } catch (err) {
+        console.error('Error updating user: ', err);
+    }
+
 }

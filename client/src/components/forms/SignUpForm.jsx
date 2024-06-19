@@ -37,8 +37,6 @@ const SignUpForm = ({handleSubmit, buttonTerm, userInfo}) => {
     }
 
     const handleCheckboxChange = event => {
-        
-        
         setUserInfoInput({
             ...userInfoInput,
             shareData: event.target.checked
@@ -82,6 +80,7 @@ const SignUpForm = ({handleSubmit, buttonTerm, userInfo}) => {
             size='small'
             value={userInfoInput.userName}
             onInput={handleInputChange}
+            disabled={userInfo? true : false}
         />
         <TextField
             margin="dense"
@@ -102,7 +101,7 @@ const SignUpForm = ({handleSubmit, buttonTerm, userInfo}) => {
             />
         } 
             label='Allow others to see my orders' />
-        <Button variant='contained' type='submit'>{buttonTerm}</Button>
+        <Button onClick={() => handleSubmit(userInfoInput)} variant='contained' type='submit'>{buttonTerm}</Button>
     </Box>
     );
 };

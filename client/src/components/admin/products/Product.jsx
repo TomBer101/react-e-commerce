@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField'
 import Table from '../../common/Table';
 import { getCategoryDoc } from '../../../services/categoriesService';
 import { updateProduct, addProduct } from '../../../services/productsService';
-import PurchasesTable from '../customers/PurchasesTable';
+import PurchasesTable from '../../common/PurchasesTable';
 
 
 const Product = ({ title, description, price, category, imgLink, id }) => {

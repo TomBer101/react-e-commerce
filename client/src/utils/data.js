@@ -15,6 +15,7 @@ export async function postData(endpoint, data) {
   return response.data;
 }
 
+
 export const getAll =  (collectionName, callback) => {
   console.log(`getting all ${collectionName}`);
 

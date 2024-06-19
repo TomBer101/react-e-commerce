@@ -28,6 +28,7 @@ const SignUpPage = () => {
         onSignup(userData);
     };
     
+    // TODO: Add login form
     return (
         <Container sx={{backgroundColor : '#e0e0e0', margin : '0', width : '33%', padding : '2%', minWidth : '190px'}}>
             <Box sx={{backgroundColor : 'white', padding : '8%'}}>

@@ -4,9 +4,18 @@ import { Outlet } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/AuthContext';
 import NavBar from '../../components/common/NavBar';
+import { useDispatch } from 'react-redux';
+import { getAllPurchases } from '../../services/purchasesService';
 
 
 const UserLayout = () => {
+    const { currenUser } = useAuth();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const purchasesUnsubscribe  = getAllPurchases(dispatch, currenUser.userName);
+    }, [])
+
 
 
     return (

@@ -3,12 +3,10 @@ import {doc, query, collection, getDoc, setDoc} from 'firebase/firestore'
 
 
 export const registerUser = async (userInfo) => {
-    console.log('in register');
     const {firstName, lastName, userName, password, shareData} = userInfo;
     const registerDate = new Date().toLocaleDateString();
 
     try {
-        console.log('user name: ', userName);
         const docRef = doc(db, 'users', userName);
         const docSnap = await getDoc(docRef);
 
