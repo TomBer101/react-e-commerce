@@ -49,11 +49,12 @@ export const changePurchasesVisibility = async (userId, isVisible, purchases) =>
     }
 }
 
-const getAllPurchases = state => state.purchases;
+const getAllPurchasesState = state => state.purchases;
 export const getPurchasesByUser = createSelector(
-    [getAllPurchases, (state, userId) => userId],
+    [getAllPurchasesState, (state, userId) => userId],
     (allPurchases, userId) => {
+        console.log('All purchases: ', allPurchases);
         if (!userId) return [];
-        return allPurchases.filter(purchase => purchase.userId === userId);
+        return allPurchases.purchases.filter(purchase => purchase.userId === userId);
     }
 )

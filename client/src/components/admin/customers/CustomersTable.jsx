@@ -1,7 +1,7 @@
 // src/components/UserTable.js
 import React from 'react';
 
-import PurchasesTable from './PurchasesTable';
+import PurchasesTable from '../../common/PurchasesTable';
 import GenericTable from '../../common/Table';
 
 const columns = [

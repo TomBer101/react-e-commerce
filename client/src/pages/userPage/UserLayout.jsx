@@ -6,15 +6,19 @@ import { useAuth } from '../../contexts/AuthContext';
 import NavBar from '../../components/common/NavBar';
 import { useDispatch } from 'react-redux';
 import { getAllPurchases } from '../../services/purchasesService';
-
+import { getAllProducts } from '../../services/productsService';
 
 const UserLayout = () => {
-    const { currenUser } = useAuth();
+    const { currentUser } = useAuth();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const purchasesUnsubscribe  = getAllPurchases(dispatch, currenUser.userName);
-    }, [])
+        console.log('corrent user: ', currentUser);
+        if (currentUser) {
+            const purchasesUnsubscribe  = getAllPurchases(dispatch, currentUser.userName);
+            const productsUnsubscribe  = getAllProducts(dispatch);
+        }
+    }, [currentUser])
 
 
 

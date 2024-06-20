@@ -2,6 +2,7 @@ import React from 'react'
 
 import GenericTable from './Table';
 import { useAuth } from '../../contexts/AuthContext';
+import { useSelector } from 'react-redux';
 
 const adminColumns = [
     { header: 'Name', accessor: 'productName' },
@@ -18,8 +19,8 @@ const clientColumns = [
 
 const PurchasesTable = ({ purchases }) => {
     const { currentUser } = useAuth();
-  
     const columns = currentUser.role === 'admin'? adminColumns : clientColumns;
+
 
     return <GenericTable data={purchases} columns={columns} />;
   };

@@ -80,7 +80,7 @@ const SignUpForm = ({handleSubmit, buttonTerm, userInfo}) => {
             size='small'
             value={userInfoInput.userName}
             onInput={handleInputChange}
-            disabled={userInfo? true : false}
+            disabled={userInfo? true : false} // TODO: unstaed of disable -> error if username exists 
         />
         <TextField
             margin="dense"
