@@ -7,6 +7,7 @@ import NavBar from '../../components/common/NavBar';
 import { useDispatch } from 'react-redux';
 import { getAllPurchases } from '../../services/purchasesService';
 import { getAllProducts } from '../../services/productsService';
+import { getAllCategories } from '../../services/categoriesService';
 
 const UserLayout = () => {
     const { currentUser } = useAuth();
@@ -17,6 +18,7 @@ const UserLayout = () => {
         if (currentUser) {
             const purchasesUnsubscribe  = getAllPurchases(dispatch, currentUser.userName);
             const productsUnsubscribe  = getAllProducts(dispatch);
+            const categoriesUnsubscribe = getAllCategories(dispatch);
         }
     }, [currentUser])
 

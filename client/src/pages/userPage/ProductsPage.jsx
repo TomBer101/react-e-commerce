@@ -7,12 +7,16 @@ import Product from '../../components/customer/Product';
 const ProductsPage = () => {
 
     const products = useSelector(state => state.products.products);
-
     const [productsDisplay, setProductsDisplay] = useState(products);
+
+    const maxPrice = useMemo(() => {
+        return products.length > 0 ? Math.max(...products.map(product => product.price)) : 0;
+    }, [products]);
+
     const [filterTerms, setFilterTerms] = useState({
         title: '',
         category: '',
-        price: Infinity,
+        price: maxPrice,
     })
 
 
