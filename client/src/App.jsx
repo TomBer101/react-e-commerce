@@ -32,7 +32,7 @@ function App() {
           <Route path='/user' element={<ProtectedRoute allowedRole='user' component={UserLaout} />} >
             <Route path='account' element={<AccountPage />} />
             <Route path='orders' element={<OrdersPage />} />
-            <Route path='products' element={<Products />} />
+            <Route path='products' element={<ProductsPage />} />
             <Route path='statistics' element={<Statistics />} />
           </Route>
           <Route path='*' element={<h1>Does Not Exists</h1>} />

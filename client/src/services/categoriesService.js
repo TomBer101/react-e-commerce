@@ -12,7 +12,7 @@ import { addDocument, getAll } from "../utils/data"
     
 // }
 
-export const getAllCategories = (dispatch) => {
+export const getAllCategories = (dispatch=undefined) => {
     //return getAll('categories', callback);
     console.log('Listening for changes in categories collection');
     
@@ -28,7 +28,7 @@ export const getAllCategories = (dispatch) => {
             }
         })
 
-        dispatch(fetchCategoriesSuccess(purchases));
+        dispatch? (fetchCategoriesSuccess(purchases)) : null;
     })
 }
 

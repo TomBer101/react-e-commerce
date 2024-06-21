@@ -29,6 +29,8 @@ function Products() {
     //     });
     //   }, [products]); // Re-run useEffect when products change
 
+
+    /*TODO: create a list component. */
     return (
         <Box className='products-page'>
                 <Typography fontWeight='400' align='justify' variant='h4' >Products</Typography>

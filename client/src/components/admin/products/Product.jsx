@@ -17,8 +17,6 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
     const categories = useSelector(state => state.categories.categories);
     const purchases = useSelector(state => state.purchases.purchases);
 
-    console.log('categories: ', categories, 'purchases: ', purchases);
-
     const [productPurchases, setProductPurchases] = useState([]);
     const [productInput, setProductInput] = useState({
         title: title,

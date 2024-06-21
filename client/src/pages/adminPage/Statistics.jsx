@@ -8,11 +8,11 @@ import SalesPerCustomer from '../../components/admin/statistics/SalesPerCustomer
 const Statistics = () => {
 
 
-
+    // TODO: slide between two grapsh
     return (
         <div className='statistics-page' style={{height : '100%'}}>
             <h3>Statictaocs page</h3>
-            {/* <ProductSalesChart /> */}
+            <ProductSalesChart />
             <SalesPerCustomer />
         </div>
     );

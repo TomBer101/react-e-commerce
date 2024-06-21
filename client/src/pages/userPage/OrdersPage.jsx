@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import PurchasesTable from '../../components/common/PurchasesTable';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSelector } from 'react-redux';
-import { getPurchasesByUser } from '../../services/purchasesService';
+import { getPurchasesByUser } from '../../redux/selectors/purchases';
 
 const OrdersPage = () => {
     const { currentUser } = useAuth();

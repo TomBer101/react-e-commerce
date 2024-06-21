@@ -5,8 +5,8 @@ import { useAuth } from '../../contexts/AuthContext';
 import { getUserData, updateUser } from '../../services/usersService';
 import SignUpForm from '../../components/forms/SignUpForm';
 import { useSelector } from 'react-redux';
-import { changePurchasesVisibility, getPurchasesByUser } from '../../services/purchasesService';
-
+import { changePurchasesVisibility } from '../../services/purchasesService';
+import { getPurchasesByUser } from '../../redux/selectors/purchases';
 
 const AccountPage = () => {
 
@@ -43,7 +43,7 @@ const AccountPage = () => {
     }
 
     return (
-        <Box sx={{backgroundColor : '#e0e0e0', margin : '0', width : '33%', padding : '2%', minWidth : '190px'}}>
+        <Box sx={{backgroundColor : 'white', margin : 'auto', width : '33%', padding : '2%', minWidth : '190px'}}>
             <SignUpForm 
                 buttonTerm={'Save!'} 
                 userInfo={userInfo}
