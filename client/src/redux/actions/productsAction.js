@@ -1,7 +1,3 @@
-// userActions.js
-//import { getUsers } from '../services/userService';
-
-
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_products_SUCCESS';
 export const FETCH_PRODUCTS_FAILURE = 'FETCH_products_FAILURE';
 

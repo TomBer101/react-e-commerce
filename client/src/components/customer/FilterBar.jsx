@@ -1,24 +1,27 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, Slider, Stack, TextField } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, Slider, Stack, TextField } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const FilterBar = ({onFilterChange, maxPrice}) => {
+import '../../styles/customer/filterbar.css';
+
+// TODO: test filter bar
+const FilterBar = ({onFilterChange, values, maxPrice}) => {
 
     const categories = useSelector(state => state.categories.categories);
-
+    console.log(categories);
     return (
-        <Stack direction='row' spacing={2}>
+        <div className='filter-bar'>
             <p>Filter By: </p>
             <FormControl sx={{ width: '100%', flexDirection: 'row' }}>
                 <InputLabel>Category</InputLabel>
                 <Select
                     //labelId={`${id}-category-label`}
-                    id={`${id}-category`}
-                    value={productInput.category}
-                    onChange={e => onFilterChange(e)}
+                    id={`category`}
+                    value={values.category}
+                    onChange={e => { onFilterChange(e)}}
                     name='category'
                     size='small'
-                    sx={{ mb: '5%', flex: '1' }}
+                    sx={{  flex: '1' }}
                 >
                     <MenuItem key='default' value={''}>All</MenuItem>
                     {
@@ -28,19 +31,22 @@ const FilterBar = ({onFilterChange, maxPrice}) => {
                     }
                 </Select>
             </FormControl>
-            <FormControl sx={{ width: '100%', flexDirection: 'row' }}>
+            <FormControl sx={{ width: '100%', flexDirection: 'row', gap:'1rem' }}>
                 <InputLabel>Price</InputLabel>
                 <Slider
                     max={maxPrice}
                     name='price'
                     onChange={e => onFilterChange(e)}
+                    value={values.price}
                 />
+                {`$${values.price}`}
             </FormControl>
             <FormControl sx={{ width: '100%', flexDirection: 'row' }}>
-                <InputLabel>Title</InputLabel>
-                <TextField />
+                
+                <TextField label='Title' variant='outlined' size='small' name='title' value={values.title} onChange={e => onFilterChange(e)} fullWidth/>
             </FormControl>
-        </Stack>
+            <Button size='small' onClick={e => onFilterChange(e)}>clear</Button>
+        </div>
     );
 };
 

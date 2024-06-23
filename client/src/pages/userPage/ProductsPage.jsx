@@ -1,5 +1,5 @@
 import { Box, Container, Divider, List, ListItem } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import FilterBar from '../../components/customer/FilterBar';
 import { useSelector } from 'react-redux';
 import Product from '../../components/customer/Product';
@@ -10,6 +10,7 @@ const ProductsPage = () => {
     const [productsDisplay, setProductsDisplay] = useState(products);
 
     const maxPrice = useMemo(() => {
+        console.log(products);
         return products.length > 0 ? Math.max(...products.map(product => product.price)) : 0;
     }, [products]);
 
@@ -21,31 +22,34 @@ const ProductsPage = () => {
 
 
     const handleFilterChange = event => {
-        const {name, value} = event;
+        const {name, value} = event.target;
+        console.log(`name: ${name}, value: ${value}`);
         setFilterTerms({
             ...filterTerms,
             [name]: value
         })
     }
+
     useEffect(() => {
         console.log('products: ', productsDisplay);
     }, [productsDisplay])
 
     useEffect(() => {
-        const filteredProducts = products.filter(product => product.title.includes(filterTerms.title))
-                                        .filter(product => product.price < filterTerms.price)
-                                        .filter(product => {
-                                            return filterTerms.category? product.category === filterTerms.category : true
-                                        })
-                                        console.log(filteredProducts);
-        setProductsDisplay(filteredProducts)
+        var filteredProducts = products.filter(product => product.title.toLowerCase().includes(filterTerms.title.toLowerCase())).filter(prod => prod.price <= filterTerms.price)
+        if (filterTerms.category !== '') {
+            filteredProducts = filteredProducts.filter(prod => prod.category.id === filterTerms.category)
+        }
         
+                                     
+        console.log(filteredProducts);
+        setProductsDisplay(filteredProducts)
+        console.log('products collection: ', products);
     }, [products, filterTerms])
 
     //TODO: create a list component.
     return (
-        <Container>
-            <FilterBar onFilterChange={handleFilterChange}/>
+        <Container sx={{p:0}}>
+            <FilterBar onFilterChange={handleFilterChange} values={filterTerms} maxPrice={maxPrice}/>
             <Divider />
             <Box display='flex' gap='2%'>
                 <List sx={{overflowY: 'scroll', height: '65vh', width: '60%', margin: 'auto'}}>

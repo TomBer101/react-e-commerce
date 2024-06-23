@@ -16,19 +16,15 @@ export const getAllCategories = (dispatch=undefined) => {
     //return getAll('categories', callback);
     console.log('Listening for changes in categories collection');
     
-    //const unsubscribe = getAll('purchases', (data) => dispatch(fetchPurchasesSuccess(data)))
-    //return unsubscribe;
-
     const q = query(collection(db, 'categories'));
     onSnapshot(q, querySnapshot => {
-        const purchases = querySnapshot.docs.map(doc => {
+        const categories = querySnapshot.docs.map(doc => {
             return {
                 id: doc.id,
                 ...doc.data(),
             }
         })
-
-        dispatch? (fetchCategoriesSuccess(purchases)) : null;
+        dispatch? dispatch(fetchCategoriesSuccess(categories)) : null;
     })
 }
 

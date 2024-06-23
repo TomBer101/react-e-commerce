@@ -1,0 +1,13 @@
+.filter-bar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filter-bar > div:first-child {
+    flex: 1;
+}
+
+.filter-bar > p {
+    min-width: fit-content;
+}
