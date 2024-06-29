@@ -1,0 +1,17 @@
+.cart-item button {
+    padding: 0.2rem 0.5rem;
+}
+
+.buttons-container {
+    display: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    gap: 3%;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}

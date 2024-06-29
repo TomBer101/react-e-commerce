@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Paper, Box } from '@mui/material';
 
-import { getAllPurchasesByProduct } from '../../redux/selectors/purchases';
 
-import '../../styles/customer/product.css'
+import { getAllPurchasesByProduct } from '../../redux/selectors/purchases';
+import { getCartItemQuantity } from '../../redux/selectors/cart';
+import { addProduct, removeProduct } from '../../redux/actions/customer/cartActions';
+
+import '../../styles/customer/product.css';
 
 const Product = ({title, price, description, category, imgLink, id}) => {
+    const dispatch = useDispatch();
     const categories = useSelector(state => state.categories.categories);
     const productPurchases = useSelector(state => getAllPurchasesByProduct(state, id));
+    const cartQuantity = useSelector(state => getCartItemQuantity(state, id));
+    console.log(`${title} in cart ${cartQuantity}`);
 
-    const [orderAmount, setOrderAmount] = useState(0);
+    const handleAddProduct = () => {
+        dispatch(addProduct(id, price, title))
+    }
+
+    const handleRemoveProduct = () => {
+        dispatch(removeProduct(id))
+    }
 
 
     return (
@@ -23,9 +35,9 @@ const Product = ({title, price, description, category, imgLink, id}) => {
                         <p>Prics: ${price}</p>
                         <p>In stock: {}</p>
                         <Box className='order-amount'>
-                            <button >-</button>
-                            <p style={{display:'inline', margin: '0 1rem'}}>{orderAmount}</p>
-                            <button>+</button>
+                            <button onClick={handleRemoveProduct}>-</button>
+                            <p style={{display:'inline', margin: '0 1rem'}}>{cartQuantity}</p>
+                            <button onClick={handleAddProduct}>+</button>
                         </Box>
                     </Grid>
                     <Grid item xs={5}>

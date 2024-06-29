@@ -1,48 +1,55 @@
-import { Box } from '@mui/material';
+import { Box, ListItem, List } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CartItem from './CartItem';
 
 const Cart = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [total, setTotal] = useState(0)
 
     // cart = {cart, total}
     const cart = useSelector(state => state.shoppingCart) // TODO: change to combined selctor of cart-prod price + add total price
     const products = useSelector(state => state.products.products)
-
     const handleOrder = () => {
 
     };
 
+    console.log(cart);
+
     // TODO: optimize list rendreing + item rendering
     return (
-        <Box>
-            <h2>Shopping Cart</h2>
-            <Box display='flex' gap='2%'>
-                <List sx={{ overflowY: 'scroll', height: '65vh', width: '60%', margin: 'auto' }}>
-                    {
-                        cart.cart.map(product =>{
-                            const prod = products.find(p => p.id === product.productId);
-                            const combined = {
-                                ...product,
-                                productName: prod.title
+            <Box sx={{
+                display: 'grid',
+                width: '28vw',
+                height: '100%',
+                gridTemplateRows:'0.1fr 2fr 0.1fr'
+            }} >
+                <h4>Shopping Cart</h4>
+                <Box display='flex' gap='2%'>
+                    <List sx={{ overflowY: 'scroll'}}>
+                        {
+                            cart.cart.map(product => {
+                                const prod = products.find(p => p.id === product.productId);
+                                const combined = {
+                                    ...product,
+                                    productName: prod.title
+                                }
+
+                                return (
+                                    <ListItem key={combined.id}>
+                                        <CartItem {...combined} />
+                                    </ListItem>
+                                )
                             }
-                        return (
-                        <ListItem key={product.id}>
-                            <CartItem {...combined}/>
-                        </ListItem>
-                        )
+                            )
                         }
-                        )
-                    }
-                </List>
+                    </List>
+                </Box>
+                <div className="footer">
+                    <h6>Total: ${cart.total}</h6>
+                    <button onClick={handleOrder}>
+                        Order
+                    </button>
+                </div>
             </Box>
-            <h6>Total: ${total}</h6>
-            <button onClick={handleOrder}>
-                Order
-            </button>
-        </Box>
     );
 };
 

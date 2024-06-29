@@ -2,9 +2,9 @@ export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
-export const addProduct = (productId, productPrice) => ({
+export const addProduct = (productId, productPrice, productTitle) => ({
     type: ADD_PRODUCT,
-    payload: {productId, productPrice}
+    payload: {productId, productPrice, productTitle}
 })
 
 export const removeProduct = productId => ({

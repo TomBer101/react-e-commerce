@@ -1,6 +1,7 @@
 import {createSelector} from 'reselect'
 
 const getAllPurchasesState = state => state.purchases.purchases;
+
 export const getPurchasesByUser = createSelector(
     [getAllPurchasesState, (state, userId) => userId],
     (allPurchases, userId) => {

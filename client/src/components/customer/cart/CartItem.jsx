@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProduct, deleteProduct, removeProduct } from '../../../redux/actions/customer/cartActions'
 
-const CartItem = ({ qty, price, productId, productName}) => {
+import '../../../styles/customer/cartItem.css'
 
+const CartItem = ({ quantity, price, productId, productName}) => {
+    console.log(`cart item data:
+        id: ${productId}
+        quantity: ${quantity}
+        price: ${price}
+        `);
     const dispatch = useDispatch();
 
     // TODO: extract and re-use in prodct as well
@@ -23,13 +29,13 @@ const CartItem = ({ qty, price, productId, productName}) => {
         <div className='cart-item'>
             <p>{productName}</p>
             <div className="buttons-container">
-                <button> - </button>
-                {qty}
-                <button> + </button>
+                <button onClick={handleRemoveProduct}> - </button>
+                <p>{quantity}</p>
+                <button onClick={handleAddProduct}> + </button>
                 <p>units</p>
             </div>
-            <p>- Total: ${qty + price}</p>
-            <button> X </button>
+            <p>- Total: ${quantity * price}</p>
+            <button onClick={handleDeleteProdyc}> X </button>
         </div>
     );
 };
