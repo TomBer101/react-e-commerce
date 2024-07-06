@@ -1,24 +1,38 @@
 import { Button, OutlinedInput, Paper, Typography } from '@mui/material';
 import React, { useRef, useState } from 'react';
 
+import { updateCategory, removeCategory } from '../../services/categoriesService';
 
 import '../../styles/admin/category.css'
 
-const Category = ({title}) => {
+const Category = ({title, id}) => {
     const [inUpdate, setInUpdate] = useState(false)
     const inputRef = useRef(null);
-
-    const handleUpgradeClick = () => {
+console.log((id));
+    const handleUpgradeClick = async () => {
         if (!inUpdate) {
             setInUpdate(true)
         } else {
             console.log(inputRef.current.value);
+            try {
+                await updateCategory(id, inputRef.current.value);
+                setInUpdate(!inUpdate)
+            } catch (err) {
+                console.error('Error updating category: ', err);
+            }
+            
         }
     }
 
-    const handleremoveClick = () => {
+    const handleremoveClick = async () => {
         if (inUpdate) {
             setInUpdate(false)
+        } else {
+            try {
+                await removeCategory(id);
+            } catch (err) {
+                console.error('Error deleting a category: ', id);
+            }
         }
     }
 

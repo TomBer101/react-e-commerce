@@ -45,10 +45,12 @@ export function AuthProvider({ children }) {
     const login = async({userName, password}) => {
         try {
             setLoading(true);
-            const res = await loginUser(userName, password);
-            if (res.success) {
-                setCurrentUser({ userName, role : res.role });
-                navigate(`/${res.role}`);
+            const {success, role, shareData} = await loginUser(userName, password);
+            console.log('shareData:', shareData);
+            
+            if (success) {
+                setCurrentUser({ userName, role, shareData});
+                navigate(`/${role}`);
             } else {
                 setError('Login failed');
             }
@@ -61,7 +63,14 @@ export function AuthProvider({ children }) {
 
     function logout() {
         setCurrentUser(null);
-        navigate('/login');
+        navigate('/');
+    }
+
+    function changeShareData  ()  {
+        setCurrentUser({
+            ...currentUser,
+            shareData: !shareData
+        })
     }
 
     const value = useMemo( () => ({
@@ -70,7 +79,8 @@ export function AuthProvider({ children }) {
         loading, 
         onSignup : signup, 
         onLogin : login, 
-        onLogOut : logout
+        onLogOut : logout,
+        changeShareData: changeShareData
     }), [currentUser]);
 
     return (

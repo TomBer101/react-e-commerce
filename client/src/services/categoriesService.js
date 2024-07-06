@@ -1,16 +1,21 @@
 import db from '../utils/firebase';
- import {doc, query, onSnapshot, collection, getDoc} from 'firebase/firestore';
+ import {doc, query, onSnapshot, collection, getDoc, updateDoc, deleteDoc} from 'firebase/firestore';
 
 import { fetchCategoriesSuccess } from "../redux/actions/admin/categoriesAction";
 import { addDocument, getAll } from "../utils/data"
 
-// export const getAll = async () => {
-//     console.log('getting all categories');
-
-//     const q = query(collection(db, 'categories'));
-//     onSnapshot(q, querySnapshot =>  {console.log(querySnapshot.docs); ;return (querySnapshot.docs)});
-    
-// }
+export const updateCategory = async (categoryId, name) => {
+    const updatedCategory = doc(db, 'categories', categoryId);
+    try {
+        await updateDoc(updatedCategory, {
+            name: name,
+            id: categoryId
+        });
+    } catch (err) {
+        console.error('Error updating category: ', err);
+        throw new Error;
+    }
+}
 
 export const getAllCategories = (dispatch=undefined) => {
     //return getAll('categories', callback);
@@ -41,4 +46,13 @@ export const getCategoryDoc = async (categoryRef) => {
       console.error("Category document not found");
       return null;
     }
-  };
+};
+
+export const removeCategory = async (categortId) => {
+    try {
+        await deleteDoc(doc(db, 'categories', categortId))
+    } catch (err) {
+        console.error('Error deleteing category: ', err)
+        throw new Error
+    }
+}

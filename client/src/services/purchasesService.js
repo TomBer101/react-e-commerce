@@ -1,8 +1,6 @@
 import db from "../utils/firebase"
-import {createSelector} from 'reselect';
-import { collection, getDocs, onSnapshot, or, query, where, writeBatch } from "firebase/firestore";
+import { collection, doc, onSnapshot, or, query, where, writeBatch, Timestamp } from "firebase/firestore";
 
-import { getAll } from "../utils/data";
 import {  fetchPurchasesSuccess } from "../redux/actions/purchaseAction";
 
 
@@ -49,3 +47,34 @@ export const changePurchasesVisibility = async (userId, isVisible, purchases) =>
     }
 }
 
+export const submitPurchase = async (userId, isVisible, cart) => {
+    try {
+        const timeStamp = Timestamp.now();
+        //const timeStamp = Date();
+        const batch = writeBatch(db);
+        console.log(cart);
+
+
+        cart.forEach(cartItem => {
+            const purchaseRef = doc(collection(db, 'purchases'));
+            batch.set(purchaseRef, {
+                price: cartItem.price,
+                quantity: cartItem.quantity,
+                productId: cartItem.productId,
+                isVisible,
+                date: timeStamp,
+                userId
+            });
+        });
+
+        await batch.commit()
+    } catch (err) {
+        console.error('Error ourchase products: ', err);
+        throw new Error('Couldnt purchaes prpodeuct...')
+    }
+
+}
+
+/*
+date, id, isvisible, price productid, quantity,userid
+*/

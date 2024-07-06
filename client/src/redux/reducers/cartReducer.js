@@ -1,8 +1,9 @@
-import {ADD_PRODUCT, REMOVE_PRODUCT, DELETE_PRODUCT} from '../actions/customer/cartActions';
+import {ADD_PRODUCT, REMOVE_PRODUCT, DELETE_PRODUCT, PURCHASE_SUCCESS} from '../actions/customer/cartActions';
 
 const initState = {
     cart: [],
-    total: 0
+    total: 0,
+
 }
 
 const cartReducer = (state = initState, action) => {
@@ -66,6 +67,12 @@ const cartReducer = (state = initState, action) => {
               total: state.total - totalPriceReduction,
             };
         }
+        case PURCHASE_SUCCESS:
+            return {
+                ...state,
+                cart: [], 
+                total: 0,
+            }
         default:
             return state
     }

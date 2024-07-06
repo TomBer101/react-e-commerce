@@ -46,7 +46,7 @@ function Categories() {
             }}>
                 <div className="categories-list">
                     {
-                        categories.map(category => { return <Category key={category.name} title={category.name} /> })
+                        categories.map(category => { return <Category key={category.id} title={category.name} id={category.id}/> })
                     }
                 </div>
 

@@ -1,5 +1,6 @@
 import db from '../utils/firebase';
 import {doc, query, collection, getDoc, setDoc} from 'firebase/firestore'
+import { getUserData } from './usersService';
 
 
 export const registerUser = async (userInfo) => {
@@ -52,8 +53,13 @@ export const loginUser = async (userName, password) => {
         } else if (password === docSnap.data().password) {
             
                 console.log(docSnap.data());
-                console.log('User confirmd - can redirect to user page')
-                return({success : true, role : docSnap.data().role});
+                let shareData;
+                if (docSnap.data().role === 'user') {
+                    const user = await getUserData(userName)
+                    shareData = user.shareData
+                }
+                console.log(shareData);
+                return({success : true, role : docSnap.data().role, shareData: shareData});
             
         } else {
             return {success : false, error : 'Wrong Password'}

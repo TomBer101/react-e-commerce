@@ -13,13 +13,9 @@ const ProductsPage = () => {
     const [productsDisplay, setProductsDisplay] = useState(products);
 
     const maxPrice = useMemo(() => {
-        console.log(products);
+        console.log('catalog: ', products);
         return products.length > 0 ? Math.max(...products.map(product => product.price)) : 0;
     }, [products]);
-
-    useEffect(() => {
-
-    })
 
     const [filterTerms, setFilterTerms] = useState({
         title: '',

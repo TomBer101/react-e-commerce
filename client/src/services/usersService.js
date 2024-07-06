@@ -48,8 +48,8 @@ export const getUserData = async (userId) => {
 
 export const updateUser = async (updatedUser) => {
     try {
-        const userRef = doc(db, 'users', updateUser.userName);
-        await updateDoc(userRef, updateUser);
+        const userRef = doc(db, 'users', updatedUser.userName);
+        await updateDoc(userRef, updatedUser);
     } catch (err) {
         console.error('Error updating user: ', err);
     }
