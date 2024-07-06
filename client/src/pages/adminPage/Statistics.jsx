@@ -10,7 +10,7 @@ const Statistics = () => {
 
     // TODO: slide between two grapsh
     return (
-        <div className='statistics-page' style={{height : '100%'}}>
+        <div className='statistics-page' >
             <h3>Statictaocs page</h3>
             <ProductSalesChart />
             <SalesPerCustomer />

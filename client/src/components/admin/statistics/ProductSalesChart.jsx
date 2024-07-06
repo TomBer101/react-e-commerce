@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 
 import {AgChartsReact} from 'ag-charts-react';
 import {useSelector} from 'react-redux';
+import { Box } from "@mui/material";
 
 const series = [{ type: 'pie', angleKey: 'amount', legendItemKey: 'productName' }];
 
@@ -38,7 +39,12 @@ const ProductSalesChart = () => {
     }, [products,purchases]);
 
     return (
-        <AgChartsReact options={purchsesByProduct}/>
+        <Box height='75vh'>
+<AgChartsReact options={purchsesByProduct}/>
+        </Box>
+            
+
+        
     )
 }
 

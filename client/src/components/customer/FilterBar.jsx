@@ -8,7 +8,7 @@ import '../../styles/customer/filterbar.css';
 const FilterBar = ({onFilterChange, values, maxPrice}) => {
 
     const categories = useSelector(state => state.categories.categories);
-    console.log(categories);
+    console.log(`max prics = ${maxPrice}`);
     return (
         <div className='filter-bar'>
             <p>Filter By: </p>

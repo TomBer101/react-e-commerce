@@ -52,6 +52,7 @@ const SignUpPage = () => {
                         variant='outlined'
                         type='password'
                         size='small'
+                        autoComplete='true'
                     />
                     <Button variant='contained' type='submit' sx={{width : '100%', margin : '10px 0'}}>Login</Button>
                     <div>
