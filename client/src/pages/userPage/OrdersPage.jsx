@@ -23,8 +23,8 @@ const OrdersPage = () => {
     }, [usersPurchases, products])
 
     return (
-        <Box>
-            <h5>orders</h5>
+        <Box maxHeight='75vh'>
+            
             <PurchasesTable purchases={purchasesWithProductName}/>
         </Box>
     );
