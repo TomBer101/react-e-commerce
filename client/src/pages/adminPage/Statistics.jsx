@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import ProductSalesChart from '../../components/admin/statistics/ProductSalesChart';
 import SalesPerCustomer from '../../components/admin/statistics/SalesPerCustomer'
 
+import '../../styles/admin/statisticsPage.css'
+
 
 const Statistics = () => {
 

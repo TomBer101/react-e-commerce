@@ -39,7 +39,7 @@ const ProductSalesChart = () => {
     }, [products,purchases]);
 
     return (
-        <Box height='75vh'>
+        <Box height='68vh' width='75%' margin='0 auto' >
 <AgChartsReact options={purchsesByProduct}/>
         </Box>
             

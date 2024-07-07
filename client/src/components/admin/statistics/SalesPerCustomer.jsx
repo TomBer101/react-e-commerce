@@ -137,9 +137,10 @@ const SalesPerCustomer = () => {
 
     return (
         <Box height='90vh'>
-            <Typography variant="h3">Products Quantity Per Customer</Typography>
-            <Typography variant="caption">Sort by Customer</Typography>
+            <Typography variant="h5">Products Quantity Per Customer</Typography>
+            <Typography margin='0 2rem' variant="caption">Sort by Customer</Typography>
             <Select
+                sx={{width: '10%'}}
                 id='current-user-purchases'
                 onChange={handleChoosinfUser}
                 size="small"
@@ -153,7 +154,10 @@ const SalesPerCustomer = () => {
                     ))
                 }
             </Select>
+            <Box height='75%' width='75%' margin='2% auto' >
             <AgChartsReact options={pieChartOptions}/>
+
+            </Box>
         </Box>
     )
 }
