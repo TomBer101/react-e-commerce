@@ -42,7 +42,7 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
 
     useEffect(() => {
         if (id) {
-            const myPurchases = purchases.filter(purchase => purchase.productId === id);
+            const myPurchases = purchases.filter(purchase => purchase.productId === id).map(purchase => ({...purchase, name: purchase.userId}));
             setProductPurchases(myPurchases)
         }
     }, [purchases, id]);
@@ -77,7 +77,6 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
 
     };
 
-    // data manipulation => combine each product with purchases
 
     return (
         <Box sx={{}}>

@@ -4,7 +4,7 @@ import GenericTable from './Table';
 import { useAuth } from '../../contexts/AuthContext';
 
 const adminColumns = [
-    { header: 'Name', accessor: 'userId' },
+    { header: 'Name', accessor: 'name' },
     { header: 'Qty', accessor: 'quantity' },
     { header: 'Date', accessor: 'date', render: (timeStamp) => <span>{`${timeStamp.toDate().toLocaleDateString()}`}</span> },
 ];

@@ -28,7 +28,7 @@ export const combineUserData = (users, purchases, products) => {
         const userPurchases = purchases.filter(purchase => purchase.userId === user.id);
         const userProducts = userPurchases.map(purchase => {
             const product = products.find(product => product.id === purchase.productId);
-            return { quantity : purchase.quantity, date : purchase.date,  productName: product ? product.title : 'Unknown' };
+            return { quantity : purchase.quantity, date : purchase.date,  name: product ? product.title : 'Unknown' };
         });
         return { userName : user.userName, registerDate : user.registerDate, purchases: userProducts };
     });
