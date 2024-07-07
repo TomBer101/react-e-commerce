@@ -26,10 +26,19 @@ const ProductsPage = () => {
     const handleFilterChange = event => {
         const { name, value } = event.target;
         console.log(`name: ${name}, value: ${value}`);
-        setFilterTerms({
-            ...filterTerms,
-            [name]: value
-        })
+        if (name === 'clear') {
+            setFilterTerms({
+                title: '',
+                category: '',
+                price: maxPrice,
+            })
+        } else {
+            setFilterTerms({
+                ...filterTerms,
+                [name]: value
+            })
+        }
+
     }
 
     const toggleCart = () => {
@@ -55,7 +64,7 @@ console.log(productsDisplay);
                 <Collapse in={isCartOpen}  orientation='horizontal' timeout='auto' unmountOnExit sx={{height: '100%'}}>
                     <Cart />
                 </Collapse>
-                <IconButton sx={{alignSelf: 'center'}} onClick={toggleCart} aria-label='Toggle Cart'>
+                <IconButton sx={{alignSelf: 'center', transform: 'rotate(-90deg)'}} onClick={toggleCart} aria-label='Toggle Cart'>
                     {isCartOpen ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>
             </Box>

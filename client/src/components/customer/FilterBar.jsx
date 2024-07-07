@@ -45,7 +45,7 @@ const FilterBar = ({onFilterChange, values, maxPrice}) => {
                 
                 <TextField label='Title' variant='outlined' size='small' name='title' value={values.title} onChange={e => onFilterChange(e)} fullWidth/>
             </FormControl>
-            <Button size='small' onClick={e => onFilterChange(e)}>clear</Button>
+            <Button name='clear' size='small' onClick={e => onFilterChange(e)}>clear</Button>
         </div>
     );
 };
