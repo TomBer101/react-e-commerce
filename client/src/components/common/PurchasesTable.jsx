@@ -2,10 +2,9 @@ import React from 'react'
 
 import GenericTable from './Table';
 import { useAuth } from '../../contexts/AuthContext';
-import { useSelector } from 'react-redux';
 
 const adminColumns = [
-    { header: 'Name', accessor: 'productName' },
+    { header: 'Name', accessor: 'userId' },
     { header: 'Qty', accessor: 'quantity' },
     { header: 'Date', accessor: 'date', render: (timeStamp) => <span>{`${timeStamp.toDate().toLocaleDateString()}`}</span> },
 ];

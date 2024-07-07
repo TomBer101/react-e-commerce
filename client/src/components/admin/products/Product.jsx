@@ -3,10 +3,9 @@ import { useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { Button, FormControl, Grid, InputBase, InputLabel, MenuItem, Select, TextareaAutosize, Typography } from '@mui/material';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField'
 
-import Table from '../../common/Table';
 import { getCategoryDoc } from '../../../services/categoriesService';
 import { updateProduct, addProduct } from '../../../services/productsService';
 import PurchasesTable from '../../common/PurchasesTable';
@@ -149,9 +148,12 @@ const Product = ({ title, description, price, category, imgLink, id }) => {
                             size='small'
                             sx={{ mb: '5%' }}
                         />
-                        {id && <Box maxHeight={'23vh'} overflow={'hidden'}>
+                        {id && <Box>
                             <Typography variant='h6' fontSize={'1rem'}>Bought by:</Typography>
+                            <Box className='purchase-table-container' maxHeight='25vh' overflow='hidden'>
                             <PurchasesTable purchases={productPurchases} />
+
+                            </Box>
                         </Box>}
                     </Grid>
                 </Grid>

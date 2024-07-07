@@ -6,9 +6,7 @@ import {  fetchPurchasesSuccess } from "../redux/actions/purchaseAction";
 
 export const getAllPurchases = (dispatch, userId = undefined) => {
     console.log('Listening for changes in purchases collection');
-    
-    //const unsubscribe = getAll('purchases', (data) => dispatch(fetchPurchasesSuccess(data)))
-    //return unsubscribe;
+
     const purchasesRef = collection(db, 'purchases');
     const q = userId? 
         query(purchasesRef,

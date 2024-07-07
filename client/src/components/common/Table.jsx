@@ -7,9 +7,16 @@ import { TableBody, TableCell, Table } from '@mui/material';
 
 const GenericTable = ({ data, columns }) => {
     return(
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{
+            overflowY: 'auto',
+            maxHeight: 'inherit'
+        }}>
             <Table>
-                <TableHead>
+                <TableHead sx={{
+                    position: 'sticky',
+                    top: 0,
+                    backgroundColor: 'white'
+                }}>
                     <TableRow>
                         {columns.map((col, index) => (
                             <TableCell key={index}>{col.header}</TableCell>
